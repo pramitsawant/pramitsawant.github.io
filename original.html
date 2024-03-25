@@ -1,0 +1,761 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.min.css">
+    <style>
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            src: local('Open Sans Regular'), local('OpenSans-Regular'), url("https://fonts.gstatic.com/s/opensans/v16/mem8YaGs126MiZpBA-UFVZ0b.woff2") format('woff2');
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            src: local('Roboto'), local('Roboto-Regular'), url("https://fonts.gstatic.com/s/roboto/v19/KFOmCnqEu92Fr1Mu4mxK.woff2") format('woff2');
+        }
+        @page {
+            size: A4;
+        }
+
+        body.A4 .sheet {
+            width: 220mm;
+            /* height: 325mm; */
+            /* height:296mm; */
+        }
+
+        body {
+            -webkit-print-color-adjust: exact;
+            color-adjust: exact;
+            background-color: #cacaca;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+            display: flex;
+            justify-content: center;
+
+            /* -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none; */
+        }
+
+        .btn-print {
+            z-index: 1;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .resume {
+            display: block;
+            font-family: 'Roboto', sans-serif;
+            font-size: 13.0736px;
+            font-weight: 400;
+            line-height: 1.5;
+            min-height: 1090.41px;
+        }
+
+        .resume h1 {
+            font-size: 2.86em;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .resume h2 {
+            font-size: 1.2em !important;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        .resume .resume__header,
+        .resume .resume__section {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.95em;
+        }
+
+        .resume .resume__header {
+            padding: 1em 1em 1em 1em;
+            /* background-color: #434e5f; */
+            background-color: rgba(18, 41, 74, 0.944);
+            color: white;
+        }
+
+        .resume .resume__section {
+            margin-bottom: 0.5em;
+        }
+
+        .resume .resume__section:last-child {
+            padding-bottom: 0;
+        }
+
+        .resume .resume__section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.3em;
+        }
+
+        .resume .resume__section-title>i {
+            margin-right: 0.63em;
+            font-size: 1.14em;
+            background-color: #5695cd;
+            color: #fff;
+            border: 0.25em solid #aacae6;
+            border-radius: 50%;
+            width: 2.51em;
+            height: 2.51em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        .resume .resume__section-title>h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .resume .resume__columns {
+            overflow: hidden;
+            padding-left: 1.4em;
+            padding-right: 1.4em;
+            padding-top: 0;
+        }
+
+        .resume .resume__main {
+            float: left;
+            width: 74%;
+            padding-right: 2em;
+        }
+
+        .resume .resume__side {
+            float: left;
+            width: 26%;
+        }
+
+        .resume .other-info p>b {
+            color: #555;
+        }
+
+        .resume .info-item {
+            margin-bottom: 0.2em;
+            font-weight: 300;
+        }
+
+        .resume .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .resume .info-label {
+            display: inline-block;
+            padding-right: 0.63em;
+            font-size: 1.14em;
+            min-width: 2.19em;
+            text-align: center;
+        }
+
+        .resume .info-label i {
+            color: #5695cd;
+        }
+
+        .resume .xp-item {
+            margin-bottom: 0.1em;
+        }
+
+        .resume .xp-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .resume .xp-job {
+            font-size: 1.14em;
+            font-weight: 400;
+            line-height: 1.25;
+            /* margin-bottom: 6px; */
+
+        }
+
+        .resume .xp-job span,
+        .resume .xp-job small {
+            font-weight: 400;
+        }
+
+        .resume .xp-job small {
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .details {
+            font-size: 12px;
+            margin-left: 2px;
+            /* margin-top: 5px; */
+            /* text-indent: 2px; */
+            margin-bottom: 5px;
+        }
+
+        .resume .xp-date {
+            font-size: 0.8em;
+            margin-top: 0.3em;
+            margin-bottom: 1px;
+            color: #5695cd;
+        }
+
+        .resume .extra {
+            margin-bottom: 0.5em;
+            margin-top: 0.5em;
+
+        }
+
+        .resume .extra:last-child {
+            margin-bottom: 0;
+        }
+
+        .resume .extra-info small {
+            color: #666;
+            display: inline-block;
+            font-size: 12px;
+        }
+
+        .resume .extra-details,
+        .resume .extra-details__progress {
+            border-radius: 2px;
+            width: 100%
+        }
+
+        .resume .extra-details {
+            margin-top: 0.5em;
+            background-color: #d1d9e14d;
+            width: 100%;
+            height: 1px;
+            position: relative;
+        }
+
+        .resume .extra-details__progress {
+            background-color: rgba(18, 41, 74, 0.7);
+            height: 2px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .resume .lang-item {
+            margin-bottom: 2em;
+        }
+
+        .resume .lang-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .resume .lang-label {
+            width: 8em;
+        }
+
+        @media print {
+            body {
+                min-width: initial !important;
+            }
+
+            .btn-print {
+                display: none;
+            }
+        }
+
+        ul.social-network {
+            list-style: none;
+            display: inline;
+            margin-left: 0 !important;
+            padding: 0;
+
+        }
+
+        ul.social-network li {
+            display: inline;
+            color: rgb(255, 255, 255);
+        }
+
+        .social-network a.icoLinkedin:hover {
+            background-color: #007bb7;
+        }
+
+        .social-network a.icoFacebook:hover i,
+        .social-network a.icoLinkedin:hover i {
+            color: #fff;
+        }
+
+        .social-circle li a {
+            display: inline-block;
+            position: relative;
+            margin: 0 auto 0 auto;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            text-align: center;
+            width: 30px;
+            height: 30px;
+            font-size: 15px;
+            color: #fff;
+        }
+
+        .social-circle li i {
+            margin: 0;
+            line-height: 30px;
+            text-align: center;
+        }
+        .footer{
+            text-align: center;
+            font-size: 8px;
+
+        }
+    </style>
+
+</head>
+
+<body class="A4">
+    <div class="sheet">
+        <!-- <button class="btn btn-print btn-sm btn-light" onClick="handlePrint()">
+            <i class="fa fa-print"></i>
+            Print
+        </button> -->
+        <div class="two-column resume">
+            <section class="resume__section resume__header">
+                <div class="resume__content">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <img src="pramit.png" style=" height: 100px; "/>        
+                        </div>
+                        <div class="col-sm-6 px-4 py-1">
+                            <h1>Pramit Sawant</h1>
+                            <h5> Full Stack Developer</h5>
+                        </div>
+                        <div class="col-sm-4 py-1">
+                            <div class="info-item"><span class="info-label"><i style="color: #fff;"
+                                        class="fa fa-location-arrow"></i></span><span class="info-text">
+                                    Bengaluru, Karnataka</span></div>
+                            <div class="info-item"><span class="info-label"><i style="color: #fff;"
+                                        class="fa fa-envelope"></i></span><span class="info-text"> <a
+                                        style="color: #fff;"
+                                        href="mailto:pramitsawant11@gmail.com">pramitsawant11@gmail.com</a></span>
+
+                            </div>
+                            <div class="info-item"><span class="info-label"><i style="color: #fff;"
+                                        class="fa fa-phone"></i></span><span
+                                    class="info-text">9158333412/8805783064</span>
+                            </div>
+                            <ul class="social-network social-circle px-4">
+
+                                <li><a href="http://www.linkedin.com/in/pramit-sawant-46486bb7" class="icoLinkedin"
+                                        title="Linkedin"><i class="fa fa-linkedin"></i></a>
+                                </li>
+                                <li><a href="#" onClick="handlePrint()" class="icoLinkedin" title="Download PDF"><i
+                                            class="fa fa-download"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </section>
+            <div class="resume__columns">
+                <div class="resume__main">
+                    <section class="resume__section resume__summary">
+                        <div class="resume__content">
+                            <div class="resume__section-title">
+                                <h2>About Me</h2>
+                            </div>
+                            <div class="other">
+                                <div class="other-info">
+                                    <p style="font-style: italic;margin-bottom: 0rem!important;font-weight: 500;">
+                                        Always striving for excellence, extremely focused, self-motivated, efficient and
+                                        goal oriented.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <section class="resume__section resume__experience">
+                        <div class="resume__content">
+                            <div class="resume__section-title">
+                                <h2>Work Experience : </h2>
+                            </div>
+                            <div class="xp-item">
+                                <div class="xp-job">
+                                    Rivulet Digital, Ahmedabad — Senior Team Lead <span style="color: #5d99cf;">(current)<span> 
+                                </div>
+                                <div class="xp-date">JUNE 2020 - PRESENT</div>
+                                <div class="xp-detail">
+                                    <p class="details">
+                                        - Owned a project from start: designed, planned, developed, and monitored
+                                            everything. Collaborated with clients to define requirements and solutions.
+                                            Managed sprints and a team to deliver features and fix bugs on time.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="xp-item">
+                                <div class="xp-job">
+                                    Umang Software Technologies, Goa — Software Developer
+                                </div>
+                                <div class="xp-date">SEPTEMBER 2018 - FEBRUARY 2020</div>
+                                <div class="xp-detail">
+                                    <p class="details">
+                                        - Owned all aspects of a project (design, planning, development, monitoring).
+                                        Partnered with clients to define needs, goals, and solutions. Ensured
+                                        high-quality products through rigorous testing. Collaborated with developers
+                                        to refine app features.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- <hr style="width:80%;margin-top: 0.1rem;margin-bottom: 0.2rem;"> -->
+                    <section class="resume__section resume__summary">
+                        <div class="resume__content">
+                            <div class="resume__section-title">
+                                <h2>Projects : </h2>
+                            </div>
+                            <div class="other">
+                                <div class="other-info">
+                                    <div class="xp-job">- Autosigma (Asset Management Platform) <span
+                                            style="color: #5d99cf;">(current)<span></span> </div>
+                                    <p class="details">
+                                        - An app that help dealers and their agency partners create, update, and deploy their marketing assets faster. We built an offers module for managing promotions,Canva clone to design ad banners : published across platforms, and an email builder for marketing campaigns.
+                                        <br>
+                                        <span style="color: gray;">(Skills: DevOps · Project Management · Product Development · NuxtJS · Typescript · Python · Docker · Jira · Github · FabricJs · GrapesJS · Vuetify · HTML Canvas · Digital Ocean · Figma)</span>
+                                    </p>
+                                </div>
+                                <div class="other-info">
+                                    <div class="xp-job">- Geographic Asset Management </div>
+                                    <p class="details">
+                                        - Developed a smart Asset Management App (25k+ pipelines/valves)
+                                        for quality monitoring, leak detection (loss calculation, valve closure
+                                        suggestion, repair time prediction), and timely reports.
+                                        <br>
+                                        <span style="color: gray;">(Skills: GIS · QGIS plugin development · DevOps · VueJS · Typescript · Python · Django · Docker · Github · Leaflet · Postgre SQL · MSSQL · Advance Database Querying · Azure cloud)</span>                                        
+                                    </p>
+                                </div>
+                                <div class="other-info">
+                                    <div class="xp-job">- Video on Demand App </div>
+                                    <p class="details">
+                                        - Developed full-stack video-on-demand app using Node.js, Vue.js, and MongoDB.
+                                        Collaborated with app developers to build the app and designed user-friendly
+                                        front-end interfaces.
+                                        <br>
+                                        <span style="color: gray;">(Skills: Client Coordination · Project Management · Product Development · Node.js · VueJS · Typescript · Github · MongoDB · AWS · Figma)</span>  
+                                    </p>
+                                </div>
+                                <div class="other-info">
+                                    <div class="xp-job">- Online Gaming App </div>
+                                    <p class="details">- Built cross-platform online gaming app with
+                                        admin panel (game management, reports ) and user accounts.
+                                        <br>
+                                        <span style="color: gray;">(Skills: Flutter · Node.js · VueJS · Typescript · Github · Github CI/CD · GCP · Figma)</span>  
+                                    </p>
+                                </div>
+                                <div class="other-info">
+                                    <div class="xp-job">- Recruitment Website </div>
+                                    <p class="details">- Built recruitment job portal (streamlined hiring for
+                                        recruiters: custom postings, candidate search, resume management).
+                                        Designed user-friendly interface for efficient job search and applications.
+                                        Ensured platform performance and security. 
+                                        <br>
+                                        <span style="color: gray;">(Skills: Product Development · PHP · Bootstrap · Javascript · Github · Deployment)</span>  
+                                    </p>
+                                </div>
+                                <div class="other-info">
+                                    <div class="xp-job">- CRM Web App </div>
+                                    <p class="details">- Built CRM with invoicing to streamline customer management &
+                                        payments. Designed features for efficient lead nurturing, deal tracking, and
+                                        quoting.
+                                        <br>
+                                    <span style="color: gray;">(Skills: Product Development · PHP · Bootstrap · Javascript · Github · Deployment)</span>
+                                    </p>
+                                </div>
+                                <div class="other-info">
+                                    <div class="xp-job">- Web Scraping </div>
+                                    <p class="details">- Developed Python web scraper (Scrapy , Flask API) for lead
+                                        generation. Scraped data from various websites, integrated with CRM for
+                                        SMS/email marketing. 
+                                        <span style="color: gray;">(Skills: Python · Scrapy · BeautifulSoup · Jupyter Notebook · Flask · HTML · CSS · Github)</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- <hr style="width:80%">
+                    <section class="resume__section resume__summary">
+                        <div class="resume__content">
+                            <div class="resume__section-title">
+                                <h2>Freelance Projects : </h2>
+                            </div>
+                            <div class="other">
+                                <div class="other-info">
+                                    <div class="xp-job">- Online Gaming App </div>
+                                    <p class="details">- Built cross-platform online gaming app (Nuxt.js & Flutter) with
+                                        admin panel (game management) and user accounts. Vuetify for a smooth UI/UX.
+                                    </p>
+                                </div>
+                                <div class="other-info">
+                                    <div class="xp-job">- Recruitment Website </div>
+                                    <p class="details">- Built recruitment job portal (streamlined hiring for
+                                        recruiters: custom postings, candidate search, resume management/posting).
+                                        Designed user-friendly interface for efficient job search and applications.
+                                        Ensured platform performance and security. </p>
+                                </div>
+                                <div class="other-info">
+                                    <div class="xp-job">- CRM Web App </div>
+                                    <p class="details">- Built CRM with invoicing to streamline customer management &
+                                        payments. Designed features for efficient lead nurturing, deal tracking, and
+                                        quoting.</p>
+                                </div>
+                                <div class="other-info">
+                                    <div class="xp-job">- Web Scraping </div>
+                                    <p class="details">- Developed Python web scraper (Scrapy , Flask API) for lead
+                                        generation. Scraped data from various websites, integrated with CRM for
+                                        SMS/email marketing. </p>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </section> -->
+                    <!-- <section class="resume__section resume__summary">
+                        <div class="resume__content">
+                            <div class="resume__section-title">
+                                <h2>Education : </h2>
+                            </div>
+                            <div class="other">
+                                <div class="xp-job">
+                                    Goa College of Engineering,Goa — Bachelors in Information Technology
+                                    - <span class="xp-date">(2015 - 2018)</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section> -->
+                </div>
+                <div class="resume__side">
+                    <!-- <section class="resume__section resume__languages">
+                        <div class="resume__content">
+                            <div class="resume__section-title">
+                                <h2>Recently working on</h2>
+                            </div>
+                            <ul>
+                                <li>
+                                    Honorable Mention in ACM ICPC, Asia Amritapuri Multisite Regionals
+                                </li>
+                                <li>Participated in Google Code Jam Online Coding Competition</li>                               
+                            </ul>
+                        </div>
+                    </section> -->
+                    <section class="resume__section resume__skills">
+                        <div class="resume__content">
+                            <div class="resume__section-title">
+                                <h2>Skills</h2>
+                            </div>
+                            <div class="resume__text">
+                                <!-- <div class="extra">
+                                    <div class="extra-info">Typescript </div>
+                                    <div class="extra-details">
+                                        <div class="extra-details__progress" style="width:80%" />
+                                    </div>
+                                </div>
+                                <div class="extra">
+                                    <div class="extra-info">Javascript </div>
+                                    <div class="extra-details">
+                                        <div class="extra-details__progress" style="width:90%" />
+                                    </div>
+                                </div>
+                                <div class="extra">
+                                    <div class="extra-info">Python </div>
+                                    <div class="extra-details">
+                                        <div class="extra-details__progress" style="width:91%" />
+                                    </div>
+                                </div>
+                                <div class="extra">
+                                    <div class="extra-info">Dart </div>
+                                    <div class="extra-details">
+                                        <div class="extra-details__progress" style="width:60%" />
+                                    </div>
+                                </div> -->
+
+                                <div class="extra">
+                                    <div class="extra-info">Programming Languages<br /><small>
+
+
+                                            Typescript ·
+                                            <i class="fa-brands fa-js"></i> Javascript ·
+                                            <i class="fa-brands fa-python"></i> Python · Dart ·
+                                            <i class="fa-brands fa-php"></i>PHP</small></div>
+                                    <!-- <div class="extra-details">
+                                        <div class="extra-details__progress" style="width:100%"></div>
+                                    </div> -->
+                                </div>
+                                <div class="extra">
+                                    <div class="extra-info">Javascript Frameworks<br /><small>
+                                            <i class="fa-brands fa-vuejs"></i>Vuejs ·
+                                            <i class="fa-brands fa-nuxtjs"></i>Nuxtjs ·
+                                            <i class="fa-brands fa-node"></i>Nodejs · Fabric js · Grapes js · Leaflet</small>
+                                        
+                                        </div>
+                                    <!-- <div class="extra-details">
+                                        <div class="extra-details__progress" style="width:100%"></div>
+                                    </div> -->
+                                </div>
+                                <div class="extra">
+                                    <div class="extra-info">Python Frameworks<br /><small>LangChain · Django · Flask · REST Framework · BeautifulSoup
+                                            · Scrapy · Frappe · Jupyter Notebook · Pandas · Numpy · Scipy · Matplotlib</small></div>
+                                    <!-- <div class="extra-details">
+                                        <div class="extra-details__progress" style="width:100%"></div>
+                                    </div> -->
+                                </div>
+
+                                <div class="extra">
+                                    <div class="extra-info">Web UI Frameworks<br /><small>
+                                            Vuetify ·
+                                            <i class="fa-brands fa-sass"></i> Sass ·
+                                            <i class="fa-brands fa-bootstrap"></i>Bootstrap · Tailwind</small></div>
+                                    <!-- <div class="extra-details">
+                                        <div class="extra-details__progress" style="width:100%"></div>
+                                    </div> -->
+                                </div>
+                                <div class="extra">
+                                    <div class="extra-info">Databases<br /><small>PostgreSQL · MongoDB · MySQL · MSSQL ·
+                                            Sqlite DB
+                                        </small>
+                                    </div>
+                                    <!-- <div class="extra-details">
+                                        <div class="extra-details__progress" ></div>
+                                    </div> -->
+                                </div>
+                                <div class="extra">
+                                    <div class="extra-info">Cloud<br /><small>
+                                            <i class="fa-brands fa-aws"></i> AWS ·
+                                            <i class="fa-brands fa-google"></i> GCP · AZURE ·
+                                            <i class="fa-brands fa-digital-ocean"></i>Digital Ocean
+                                        </small>
+                                    </div>
+                                    <!-- <div class="extra-details">
+                                        <div class="extra-details__progress" ></div>
+                                    </div> -->
+                                </div>
+                                <!-- <div class="extra">
+                                    <div class="extra-info">Project Management<br /><small>Jira
+                                    </small>
+                                    </div>
+                                    <div class="extra-details">
+                                        <div class="extra-details__progress" ></div>
+                                    </div>
+                                </div> -->
+                                <div class="extra">
+                                    <div class="extra-info">CI/CD Tools<br /><small>
+                                            <i class="fa-brands fa-docker"></i> Docker ·
+                                            <i class="fa-brands fa-github"></i> Github CI/CD ·
+                                            <i class="fa-brands fa-gitlab"></i> GitLab ·
+                                            <i class="fa-brands fa-bitbucket"></i> Bitbucket ·
+                                            <i class="fa-brands fa-jenkins"></i> Jenkins </small>
+                                    </div>
+                                    <!-- <div class="extra-details">
+                                        <div class="extra-details__progress" ></div>
+                                    </div> -->
+                                </div>
+      
+
+                                <div class="extra">
+                                    <div class="extra-info">Soft Skills<br /><small>Leadership · Decision making · Time
+                                        Management · Meticulous Communication · Technical Interviewing</small>
+                                    </div>
+                                    <!-- <div class="extra-details">
+                                        <div class="extra-details__progress" style="width:82%"></div>
+                                    </div> -->
+                                </div>
+                                <div class="extra">
+                                    <div class="extra-info">Other Skills
+                                        <br />
+                                        <small>LLMs · Ollama · Stable Diffusion · <i class="fa-brands fa-jira"></i>Jira · <i
+                                                class="fa-brands fa-microsoft"></i>MS Office · VS Code</small>
+                                    </div>
+                                    <!-- <div class="extra-details">
+                                        <div class="extra-details__progress" style="width:80%"></div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section class="resume__section resume__languages">
+                        <div class="resume__content">
+                            <div class="resume__section-title">
+                                <h2>Accomplishments</h2>
+                            </div>
+                            <div class="extra">
+                                <div class="extra-info">                         
+                                    - Honorable Mention in ACM ICPC, Asia Amritapuri Multisite Regionals
+                                </div>
+                                <div class="extra-info">                         
+                                    - Participated in Google Code Jam Online Coding Competition
+                                </div>                         
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <section class="resume__section resume__languages">
+                        <div class="resume__content">
+                            <div class="resume__section-title">
+                                <h2>Interests</h2>
+                            </div>
+
+                            <!-- <small> -->
+                                LLMs · Machine Learning · Fitness
+                            <!-- </small> -->
+
+
+                        </div>
+                    </section>
+                    <section class="resume__section resume__languages">
+                        <div class="resume__content">
+                            <div class="resume__section-title">
+                                <h2>Languages</h2>
+                            </div>
+                            <div class="extra">
+                                English · Hindi · Konkani · Marathi
+                            </div>
+                        </div>
+                    </section>
+                    <section class="resume__section resume__languages">
+                        <div class="resume__content">
+                            <div class="resume__section-title">
+                                <h2>Education</h2>
+                            </div>
+                            <div class="extra">
+                                Goa College of Engineering, Goa — Bachelors in Information Technology
+                                - <span class="xp-date"> 2015 - 2018</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <hr style="width:80%;margin-top: 0.5rem;margin-bottom: 0.5rem;">
+        </div>
+        <footer class="footer">Last updated : 25 Mar 2024</footer>            
+    </div>
+    <script>
+        const handlePrint = () => window.print()
+    </script>
+</body>
+
+</html>
